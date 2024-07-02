@@ -1,6 +1,6 @@
 import serial
 
-rfid_serial_port = serial.Serial("/dev/ttyUSB0", 9600)
+rfid_serial_port = serial.Serial("/dev/ttyUSB1", 9600)
 
 id_num = []
 i = 0
@@ -12,7 +12,7 @@ while True:
         i = 0
         ID = "".join(map(str, id_num))
         print(ID)
-        id_num = []  # Clear the list for the next ID
+        id_num = []
     else:
         id_num.append(data)
     i = i + 1
