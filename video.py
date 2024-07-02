@@ -17,7 +17,7 @@ if __name__ == '__main__':
         while True:
             # Read data from RFID reader
             read_bytes = ser.read(ser.inWaiting())
-            read = buffer + read_bytes.decode('utf-8', errors='ignore')
+            read = buffer + read_bytes.decode('utf-8')
             buffer = read.replace("U", "")
             
             if '\n' in buffer:
