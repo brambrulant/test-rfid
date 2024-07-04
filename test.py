@@ -35,7 +35,7 @@ def set_up_the_reader():
 	#set the power level and report back the value
 	print()
 	ser.write(b'\nN0,00\r') # read power
-	ser.write(b'\nN1,19\r') # write power
+	ser.write(b'\nN1,1B\r') # write power
 	ser.write(b'\nN0,00\r') # read again
 
 	#set up the region - this is the frequency of operation - uncomment correct line
@@ -82,8 +82,6 @@ while True:
 	RFID = read_buffer()
 	RFID_Tag = RFID[0]
 	RFID_Time = RFID[1]
-
-	print('RFID_Tag:', RFID_Tag)
 	  
 	if len(RFID_Tag) > 15:  # This should be about 15 normally
 		tag_str = RFID_Tag.decode('utf-8', 'ignore')
