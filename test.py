@@ -23,6 +23,7 @@ def reset_serial():
     # flush existing serial data
     ser.reset_input_buffer()
     ser.reset_output_buffer()
+	print(ser)
 
 # Create table if not exists
 cursor.execute('''
