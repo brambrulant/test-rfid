@@ -18,8 +18,8 @@ def set_up_the_reader():
 	#set the power level and report back the value
 	print()
 	power_level = '-2'			 #Reader power level from -2 ~ 25dB
-	ser.write(b'\nN0,25\r')
-	ser.write(b'\nN1,-2\r')
+	# ser.write(b'\nN0,25\r') # read power
+	ser.write(b'\nN1,25\r') # 
 
 	#set up the region - this is the frequency of operation - uncomment correct line
 	#ser.write(b'\nN5,03\r')                 #Region 01: US  902~928MHz
