@@ -42,7 +42,7 @@ def set_up_the_reader():
 	#ser.write(b'\nN5,03\r')                 #Region 02: TW  922~928MHz
 	#ser.write(b'\nN5,03\r')                  #Region 03: CN  920~925MHz
 	#ser.write(b'\nN5,03\r')                 #Region 04: CN2 840~845MHz
-	ser.write(b'\nN5,06\r')                 #Region 05: EU  865~868MHz
+	ser.write(b'\nN5,05\r')                 #Region 05: EU  865~868MHz
 	#ser.write(b'\nN5,03\r')                 #Region 06: JP  916~921MH
 #end set_up_the_reader()
 
@@ -95,3 +95,4 @@ while True:
 		print(RFID_Time)
 
 
+	# 
