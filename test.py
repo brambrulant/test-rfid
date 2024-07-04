@@ -9,7 +9,7 @@ import csv
 serial_port = '/dev/ttyUSB0' #this should be correct, but if not working use $ python -m serial.tools.miniterm
 ser = serial.Serial(port=serial_port,baudrate = 38400,parity=serial.PARITY_NONE,stopbits=serial.STOPBITS_ONE,bytesize=serial.EIGHTBITS,timeout=1)
 
-Stall_Time = 60               #Time to consider that the tag has completely left the reader area
+Stall_Time = 10               #Time to consider that the tag has completely left the reader area
 Last_Tag = "initialise value" #just need a value that isn't an RFID tag
 Last_Time = time.time() - Stall_Time  #set the time value to effectively 0 (for use in loop later)
 
