@@ -19,10 +19,8 @@ db_name = 'rfid_tags.db'
 conn = sqlite3.connect(db_name)
 cursor = conn.cursor()
 
-def reset_serial():
-    # flush existing serial data
-    ser.reset_input_buffer()
-    ser.reset_output_buffer()
+ser.reset_input_buffer()
+ser.reset_output_buffer()
 
 print(ser)
 
