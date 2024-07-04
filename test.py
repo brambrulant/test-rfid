@@ -17,6 +17,7 @@ Last_Time = time.time() - Stall_Time  #set the time value to effectively 0 (for 
 def set_up_the_reader():
 	#set the power level and report back the value
 	power_level = '-2'			 #Reader power level from -2 ~ 25dB
+	ser.write(b'\nN0,25\r')
 	ser.write(b'\nN1,{power_level}\r')
 
 	#set up the region - this is the frequency of operation - uncomment correct line
