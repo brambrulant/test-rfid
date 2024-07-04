@@ -19,6 +19,11 @@ db_name = 'rfid_tags.db'
 conn = sqlite3.connect(db_name)
 cursor = conn.cursor()
 
+def reset_serial():
+    # flush existing serial data
+    ser.reset_input_buffer()
+    ser.reset_output_buffer()
+
 # Create table if not exists
 cursor.execute('''
     CREATE TABLE IF NOT EXISTS tags (
