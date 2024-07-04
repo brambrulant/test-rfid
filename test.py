@@ -3,7 +3,7 @@ import os
 import sys
 import time
 import string
-import datetime
+from datetime import datetime
 import csv
 ####WARNING!!!! The RFID Module MUST be connected through the non power USB port####
 serial_port = '/dev/ttyUSB0' #this should be correct, but if not working use $ python -m serial.tools.miniterm
