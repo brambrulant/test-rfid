@@ -79,7 +79,6 @@ def read_buffer():
 set_up_the_reader()
 
 while True:
-	print(ser.read())
 	send_command()
 	RFID = read_buffer()
 	RFID_Tag = RFID[0]
@@ -92,5 +91,6 @@ while True:
 
 		insert_or_update_tag(tag_str, first_scan, last_scan)
 
-		print(RFID_Tag)  # Only display the tag id part of the value
+		print('buffer:', RFID)
+		print(RFID_Tag)
 		print(RFID_Time)
