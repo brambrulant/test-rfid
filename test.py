@@ -33,7 +33,6 @@ conn.commit()
 #start set_up_the_reader()
 def set_up_the_reader():
 	#set the power level and report back the value
-	print()
 	ser.write(b'\nN0,00\r') # read power
 	ser.write(b'\nN1,00\r') # write power
 	ser.write(b'\nN0,00\r') # read again
@@ -69,6 +68,7 @@ def send_command():
 #start read_buffer()
 def read_buffer():
 	RFID_Tag = ser.read(ser.inWaiting())   #read the buffer (ser.read) for specific byte length (inWaiting)
+	print(RFID_Tag)
 	RFID_Time = datetime.datetime.now()    #record the time the tag was read
 
 	return RFID_Tag, RFID_Time
