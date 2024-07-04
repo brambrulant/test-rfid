@@ -57,7 +57,7 @@ def read_buffer():
 set_up_the_reader()
 
 while True:
-	# send_command()
+	send_command()
 	RFID = read_buffer()
 	RFID_Tag = RFID[0]
 	RFID_Time = RFID[1]
