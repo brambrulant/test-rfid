@@ -9,8 +9,6 @@ import sqlite3
 ####WARNING!!!! The RFID Module MUST be connected through the non power USB port####
 serial_port = '/dev/ttyUSB0' #this should be correct, but if not working use $ python -m serial.tools.miniterm
 ser = serial.Serial(port=serial_port,baudrate = 38400,parity=serial.PARITY_NONE,stopbits=serial.STOPBITS_ONE,bytesize=serial.EIGHTBITS,timeout=1)
-ser.reset_input_buffer()
-ser.reset_output_buffer()
 
 Stall_Time = 10               #Time to consider that the tag has completely left the reader area
 Last_Tag = "initialise value" #just need a value that isn't an RFID tag
@@ -21,8 +19,6 @@ db_name = 'rfid_tags.db'
 conn = sqlite3.connect(db_name)
 cursor = conn.cursor()
 
-
-print(ser)
 
 # Create table if not exists
 cursor.execute('''
@@ -84,8 +80,6 @@ def read_buffer():
 set_up_the_reader()
 
 while True:
-	while ser.readline() != b'\n':
-		time.sleep(0.001)
 	print(ser.read())
 	send_command()
 	RFID = read_buffer()
