@@ -18,8 +18,8 @@ def set_up_the_reader():
 	#set the power level and report back the value
 	print()
 	ser.write(b'\nN0,00\r') # read power
-	ser.write(b'\nN1,1B\r')
-	ser.write(b'\nN0,00\r')
+	ser.write(b'\nN1,1B\r') # write power
+	ser.write(b'\nN0,00\r') # read again
 
 	#set up the region - this is the frequency of operation - uncomment correct line
 	#ser.write(b'\nN5,03\r')                 #Region 01: US  902~928MHz
@@ -31,13 +31,19 @@ def set_up_the_reader():
 #end set_up_the_reader()
 
 #start write_to_csv()
-def write_to_csv(RFID_Tag,RFID_Time):
-	data = [RFID_Tag[1:34], RFID_Time.strftime('%Y-%m-%d'), RFID_Time.strftime('%H:%M:%S.%f')]
-	with open('test.csv', 'a+') as read_file:
-		writer = csv.writer(read_file)
-		read_file.seek(0)
-		writer.writerow(data)
-#end write_to_csv()
+# Write to CSV
+def write_to_csv(RFID_Tag, RFID_Time):
+    data = [RFID_Tag.decode('utf-8', 'ignore'), RFID_Time.strftime("%m/%d/%Y, %H:%M:%S"), date.strftime("%m/%d/%Y, %H:%M:%S")]
+    with open('test.csv', 'a+', newline='') as read_file:
+        reader = csv.reader(read_file)
+        writer = csv.writer(read_file)
+        for row in reader:
+            if data[0] in row:
+                row = [row[0], row[1], RFID_Time.strftime("%m/%d/%Y, %H:%M:%S")]
+                writer.writerow()
+                return
+            else:
+                writer.writerow(data)
 
 #start send_command()
 def send_command():
@@ -66,15 +72,4 @@ while True:
 	RFID_Tag = RFID[0]
 	RFID_Time = RFID[1]
 	if len(RFID_Tag) > 15:                               #this should be about 15 normally
-		if RFID_Tag != Last_Tag:                     #compare last read to this read to see if it is the same
-			print (RFID_Tag)                     #only display the tag id part of the value
-			print (RFID_Time)                    #display the time the tag was read at (yes its delayed but close enough)
-			write_to_csv(RFID_Tag,RFID_Time)     #
-			Last_Tag = RFID_Tag                  #gives something to compare for next run through loop
-			Last_Time = time.time()              #gives seconds since /whatever/ so can check if 60 seconds has passed for next part of loop
-		elif time.time() - Last_Time > Stall_Time:   #this part of the loop checks if a /time/ has passed before recording the RFID again, this could be several minutes really
-			print (RFID_Tag)                     #do the same stuff as first loop
-			print (RFID_Time)                    #
-			write_to_csv(RFID_Tag,RFID_Time)     #
-			Last_Tag = RFID_Tag                  #
-			Last_Time = time.time()		     #
+		write_to_csv(RFID_Tag, RFID_Time)
