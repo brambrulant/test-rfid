@@ -83,7 +83,7 @@ def read_buffer():
 #main()
 set_up_the_reader()
 
-while True:
+while True & ser.readline() != b'\n':
 	print(ser.read())
 	send_command()
 	RFID = read_buffer()
