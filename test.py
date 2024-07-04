@@ -47,6 +47,7 @@ def send_command():
 
 #start read_buffer()
 def read_buffer():
+	print('read:', ser.read())
 	RFID_Tag = ser.read(ser.inWaiting())   #read the buffer (ser.read) for specific byte length (inWaiting)
 	RFID_Time = datetime.datetime.now()    #record the time the tag was read
 	return RFID_Tag, RFID_Time
@@ -56,7 +57,7 @@ def read_buffer():
 set_up_the_reader()
 
 while True:
-	send_command()
+	# send_command()
 	RFID = read_buffer()
 	RFID_Tag = RFID[0]
 	RFID_Time = RFID[1]
