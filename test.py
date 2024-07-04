@@ -83,19 +83,20 @@ def read_buffer():
 #main()
 set_up_the_reader()
 
-while True & ser.readline() != b'\n':
-	print(ser.read())
-	send_command()
-	RFID = read_buffer()
-	RFID_Tag = RFID[0]
-	RFID_Time = RFID[1]
+while True:
+	if ser.readline() != b'\n':
+		print(ser.read())
+		send_command()
+		RFID = read_buffer()
+		RFID_Tag = RFID[0]
+		RFID_Time = RFID[1]
 	  
-	if len(RFID_Tag) > 15:  # This should be about 15 normally
-		tag_str = RFID_Tag.decode('utf-8', 'ignore')
-		first_scan = RFID_Time.strftime('%Y-%m-%d %H:%M:%S.%f')
-		last_scan = RFID_Time.strftime('%Y-%m-%d %H:%M:%S.%f')
+		if len(RFID_Tag) > 15:  # This should be about 15 normally
+			tag_str = RFID_Tag.decode('utf-8', 'ignore')
+			first_scan = RFID_Time.strftime('%Y-%m-%d %H:%M:%S.%f')
+			last_scan = RFID_Time.strftime('%Y-%m-%d %H:%M:%S.%f')
 
-		insert_or_update_tag(tag_str, first_scan, last_scan)
+			insert_or_update_tag(tag_str, first_scan, last_scan)
 
-		print(RFID_Tag)  # Only display the tag id part of the value
-		print(RFID_Time)
+			print(RFID_Tag)  # Only display the tag id part of the value
+			print(RFID_Time)
