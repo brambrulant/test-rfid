@@ -45,9 +45,7 @@ def set_up_the_reader():
     # ser.write(b'\nN5,06\r')  # Region 06: JP  916~921MHz
     time.sleep(0.1)
 
-    # Turn off the buzzer - assuming 'B 0' is the correct command to disable the buzzer
-    ser.write(b'B0\r')
-    time.sleep(0.1)
+
     print("Reader setup complete.")
 
 # Insert or update tag in the database
