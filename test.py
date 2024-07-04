@@ -93,6 +93,3 @@ while True:
 
 		print(RFID_Tag)  # Only display the tag id part of the value
 		print(RFID_Time)
-
-
-	# 
