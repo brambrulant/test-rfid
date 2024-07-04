@@ -62,7 +62,7 @@ def send_command():
 	reader_command = '\nU\r'                 #uncomment if you want to only see EPC
 	# reader_command = '\nR2,0,6\r'		 #uncomment to see TID copy/paste to www.gs1.org/services/tid-decoder '806' is NXP
 	ser.write(reader_command.encode())
-	time.sleep(0.1)
+	time.sleep(1)
 #end send_command()
 
 #start read_buffer()
