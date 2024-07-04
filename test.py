@@ -16,6 +16,7 @@ Last_Time = time.time() - Stall_Time  #set the time value to effectively 0 (for 
 #start set_up_the_reader()
 def set_up_the_reader():
 	#set the power level and report back the value
+	print()
 	power_level = '-2'			 #Reader power level from -2 ~ 25dB
 	ser.write(b'\nN0,25\r')
 	ser.write(b'\nN1,{power_level}\r')
@@ -41,7 +42,7 @@ def write_to_csv(RFID_Tag,RFID_Time):
 #start send_command()
 def send_command():
 	reader_command = '\nU\r'                 #uncomment if you want to only see EPC
-	#reader_command = '\nR2,0,6\r'		 #uncomment to see TID copy/paste to www.gs1.org/services/tid-decoder '806' is NXP
+	# reader_command = '\nR2,0,6\r'		 #uncomment to see TID copy/paste to www.gs1.org/services/tid-decoder '806' is NXP
 	ser.write(reader_command.encode())
 	time.sleep(0.1)
 #end send_command()
@@ -59,6 +60,7 @@ def read_buffer():
 set_up_the_reader()
 
 while True:
+	print(ser.read())
 	send_command()
 	RFID = read_buffer()
 	RFID_Tag = RFID[0]
