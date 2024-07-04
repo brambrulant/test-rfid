@@ -34,7 +34,7 @@ conn.commit()
 def set_up_the_reader():
 	#set the power level and report back the value
 	ser.write(b'\nN0,00\r') # read power
-	ser.write(b'\nN1,1B\r') # write power
+	ser.write(b'\nN1,00\r') # write power
 	ser.write(b'\nN0,00\r') # read again
 
 	#set up the region - this is the frequency of operation - uncomment correct line
