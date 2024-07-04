@@ -29,6 +29,7 @@ def set_up_the_reader():
     ser.write(b'\nN5,05\r')  # Region 05: EU  865~868MHz
     # ser.write(b'\nN5,06\r')  # Region 06: JP  916~921MHz
     time.sleep(0.1)
+    ser.write(b'\nB 0\r')
     print("Reader setup complete.")
 
 # Write to CSV
