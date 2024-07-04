@@ -18,14 +18,14 @@ def set_up_the_reader():
 	#set the power level and report back the value
 	print()
 	ser.write(b'\nN0,00\r') # read power
-	ser.write(b'\nN1,1B\r')
+	# ser.write(b'\nN1,1B\r')
 
 	#set up the region - this is the frequency of operation - uncomment correct line
 	#ser.write(b'\nN5,03\r')                 #Region 01: US  902~928MHz
 	#ser.write(b'\nN5,03\r')                 #Region 02: TW  922~928MHz
 	#ser.write(b'\nN5,03\r')                  #Region 03: CN  920~925MHz
 	#ser.write(b'\nN5,03\r')                 #Region 04: CN2 840~845MHz
-	ser.write(b'\nN5,03\r')                 #Region 05: EU  865~868MHz
+	ser.write(b'\nN5,05\r')                 #Region 05: EU  865~868MHz
 	#ser.write(b'\nN5,03\r')                 #Region 06: JP  916~921MH
 #end set_up_the_reader()
 
