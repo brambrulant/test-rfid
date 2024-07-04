@@ -33,7 +33,7 @@ def set_up_the_reader():
 #start write_to_csv()
 # Write to CSV
 def write_to_csv(RFID_Tag, RFID_Time):
-    data = [RFID_Tag.decode('utf-8', 'ignore'), RFID_Time.strftime("%m/%d/%Y, %H:%M:%S"), date.strftime("%m/%d/%Y, %H:%M:%S")]
+    data = [RFID_Tag.decode('utf-8', 'ignore'), RFID_Time.strftime("%m/%d/%Y, %H:%M:%S"), datetime.now().strftime("%m/%d/%Y, %H:%M:%S")]
     with open('test.csv', 'a+', newline='') as read_file:
         reader = csv.reader(read_file)
         writer = csv.writer(read_file)
