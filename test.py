@@ -70,7 +70,6 @@ def send_command():
 def read_buffer():
 	RFID_Tag = ser.read(ser.inWaiting())   #read the buffer (ser.read) for specific byte length (inWaiting)
 	RFID_Time = datetime.datetime.now()    #record the time the tag was read
-	print('RFID_Tag:', RFID_Tag)
 
 	return RFID_Tag, RFID_Time
 #end read_buffer()
@@ -83,6 +82,8 @@ while True:
 	RFID = read_buffer()
 	RFID_Tag = RFID[0]
 	RFID_Time = RFID[1]
+
+	print('RFID_Tag:', RFID_Tag)
 	  
 	if len(RFID_Tag) > 15:  # This should be about 15 normally
 		tag_str = RFID_Tag.decode('utf-8', 'ignore')
@@ -92,5 +93,5 @@ while True:
 		insert_or_update_tag(tag_str, first_scan, last_scan)
 
 		print('buffer:', RFID)
-		print(RFID_Tag)
+		print(len(RFID_Tag))
 		print(RFID_Time)
