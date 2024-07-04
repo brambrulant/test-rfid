@@ -3,7 +3,7 @@ import os
 import sys
 import time
 import string
-from datetime import datetime
+import datetime
 import csv
 ####WARNING!!!! The RFID Module MUST be connected through the non power USB port####
 serial_port = '/dev/ttyUSB0' #this should be correct, but if not working use $ python -m serial.tools.miniterm
@@ -33,7 +33,7 @@ def set_up_the_reader():
 #start write_to_csv()
 # Write to CSV
 def write_to_csv(RFID_Tag, RFID_Time):
-    data = [RFID_Tag.decode('utf-8', 'ignore'), RFID_Time.strftime("%m/%d/%Y, %H:%M:%S"), datetime.now().strftime("%m/%d/%Y, %H:%M:%S")]
+    data = [RFID_Tag.decode('utf-8', 'ignore'), RFID_Time.strftime("%m/%d/%Y, %H:%M:%S"), datetime.datetime.now().strftime("%m/%d/%Y, %H:%M:%S")]
     with open('test.csv', 'a+', newline='') as read_file:
         reader = csv.reader(read_file)
         writer = csv.writer(read_file)
