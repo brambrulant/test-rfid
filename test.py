@@ -7,7 +7,7 @@ import datetime
 import csv
 import sqlite3
 ####WARNING!!!! The RFID Module MUST be connected through the non power USB port####
-serial_port = '/dev/ttyUSB0' #this should be correct, but if not working use $ python -m serial.tools.miniterm
+serial_port = '/dev/cu.usbserial-FTB6SPL3' #this should be correct, but if not working use $ python -m serial.tools.miniterm
 ser = serial.Serial(port=serial_port,baudrate = 38400,parity=serial.PARITY_NONE,stopbits=serial.STOPBITS_ONE,bytesize=serial.EIGHTBITS,timeout=1)
 
 Stall_Time = 10               #Time to consider that the tag has completely left the reader area
@@ -34,7 +34,7 @@ conn.commit()
 def set_up_the_reader():
 	#set the power level and report back the value
 	ser.write(b'\nN0,00\r') # read power
-	ser.write(b'\nN1,00\r') # write power
+	ser.write(b'\nN1,1B\r') # write power
 	ser.write(b'\nN0,00\r') # read again
 
 	#set up the region - this is the frequency of operation - uncomment correct line
@@ -45,6 +45,8 @@ def set_up_the_reader():
 	ser.write(b'\nN5,06\r')                 #Region 05: EU  865~868MHz
 	#ser.write(b'\nN5,03\r')                 #Region 06: JP  916~921MH
 #end set_up_the_reader()
+
+set_up_the_reader()
 
 # Insert or update tag in the database
 def insert_or_update_tag(tag, first_scan, last_scan):
@@ -61,23 +63,24 @@ def insert_or_update_tag(tag, first_scan, last_scan):
 def send_command():
 	reader_command = '\nU\r'                 #uncomment if you want to only see EPC
 	# reader_command = '\nR2,0,6\r'		 #uncomment to see TID copy/paste to www.gs1.org/services/tid-decoder '806' is NXP
-	ser.write(reader_command.encode())
+	ser.write(reader_command.encode('utf-8'))
 	time.sleep(1)
 #end send_command()
 
 #start read_buffer()
 def read_buffer():
+	# print('ser.read:', ser.read())
 	RFID_Tag = ser.read(ser.inWaiting())   #read the buffer (ser.read) for specific byte length (inWaiting)
-	print(RFID_Tag)
+	# print('rfid_tag:', RFID_Tag)
 	RFID_Time = datetime.datetime.now()    #record the time the tag was read
 
 	return RFID_Tag, RFID_Time
 #end read_buffer()
 
 #main()
-set_up_the_reader()
 
 while True:
+	time.sleep(0.2)
 	send_command()
 	RFID = read_buffer()
 	RFID_Tag = RFID[0]
